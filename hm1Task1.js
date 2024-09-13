@@ -17,8 +17,7 @@ console.log(item_4)
 console.log(item_3 + item_4)
 console.log(item_3 * item_4)
 
-let item_5
-item_5 = item_3
+let item_5 = item_3
 let item_6 = 15
 let item_6_type = typeof item_6
 console.log('item_6 == ',  item_6,  'item_6_type == ',  item_6_type)
