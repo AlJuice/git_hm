@@ -5,7 +5,7 @@
 function concateNumbers(){
     let n = 1
     n = String(n)
-    let sum = n + (n + n) + (n + n + n)
+    let sum = n + (+n + +n) + (+n + +n + +n)
     console.log(sum)
 };
 
