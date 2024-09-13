@@ -1,3 +1,0 @@
-1. Bug report One
-2. Bug report Two
-3. Bug report Three
