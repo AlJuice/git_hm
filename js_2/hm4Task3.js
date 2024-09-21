@@ -23,11 +23,11 @@ function controlAge(age){
             console.log("Technical work")
         }
     }
-    else if (typeof age != "number"){
+    else {
         console.log("Incorrect data type")
     }
 }
-
+controlAge("55a")
 controlAge("2")
 controlAge("age")
 controlAge(10)
