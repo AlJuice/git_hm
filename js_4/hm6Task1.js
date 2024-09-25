@@ -36,6 +36,7 @@ function methodsArray(){
 }
 methodsArray()
 console.log(arrOfNumbers)
+
 console.log(`----------- Next hm ---------------`)
 
 // 3. Деструктуризация массивов
@@ -48,6 +49,7 @@ const [first, second, ...rest] = arrNumbers
 console.log(first)
 console.log(second)
 console.log(rest)
+
 console.log(`----------- Next hm ---------------`)
 
 // 4. Конкатенация массивов
