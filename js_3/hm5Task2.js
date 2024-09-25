@@ -6,9 +6,9 @@
 // Если число делится и на 3 и на 5 без остатка, то выведите в консоль "число - делится и на 3 и на 5"
 // Пример: Число 15 делится без остатка на 3 и на 5
 
-devisionNumbers()
-function devisionNumbers(){
-    for (let number = 0; number <= 100; number++) {
+devisionNumbers(100)
+function devisionNumbers(maxValue){
+    for (let number = 0; number <= maxValue; number++) {
         if (number % 5 ==0 && number % 3 ==0 ){
             console.log(`Число ${number} делится на 3 и на 5`)
         }

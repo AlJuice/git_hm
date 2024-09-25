@@ -14,10 +14,10 @@
 // - Реализуйте с помощью метода replaceALL
 // Пример: Hello!1I1am1a1JS1student!
 
-// 1 задание
-findEvenNumbers()
-function findEvenNumbers(){
-    for (let index = 10; index >= 0 ; index--) {
+// 1 задание версия 1
+findEvenNumbers(10)
+function findEvenNumbers(startNumber){
+    for (let index = startNumber; index >= 0 ; index--) {
         if(index % 2 === 0){
             console.log(index)
         }
@@ -25,6 +25,14 @@ function findEvenNumbers(){
 }
 console.log(`----------- Next hm ---------------`)
 
+// 1 задание версия 2
+findEvenNumbers(10)
+function findEvenNumbers(startNumber){
+    for (let index = startNumber; index >= 0 ; index -= 2) {
+        console.log(index)
+    }
+}
+console.log(`----------- Next hm ---------------`)
 
 // 2 задание
 printSmiles()

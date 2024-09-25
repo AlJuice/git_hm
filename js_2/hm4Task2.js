@@ -13,7 +13,6 @@
 
 const minAge = 18
 const maxAge = 60
-let age
 
 function controlAge(age){
     if (typeof age != "number"){
@@ -36,6 +35,7 @@ function controlAge(age){
 }
 
 controlAge("age")
+controlAge("age18")
 controlAge(10)
 controlAge(17)
 controlAge(18)

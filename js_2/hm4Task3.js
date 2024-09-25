@@ -5,7 +5,6 @@
 
 const minAge = 18
 const maxAge = 60
-let age
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 function controlAge(age){
