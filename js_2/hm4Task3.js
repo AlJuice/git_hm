@@ -5,7 +5,6 @@
 
 const minAge = 18
 const maxAge = 60
-let age
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 function controlAge(age){
@@ -23,11 +22,11 @@ function controlAge(age){
             console.log("Technical work")
         }
     }
-    else if (typeof age != "number"){
+    else {
         console.log("Incorrect data type")
     }
 }
-
+controlAge("55a")
 controlAge("2")
 controlAge("age")
 controlAge(10)

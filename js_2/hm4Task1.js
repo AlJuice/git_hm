@@ -5,13 +5,14 @@
 // и значение "junior" - есои меньше
 
 const salary = 1000
-let grade
+const maxValue = 1000
 
 function checkGrades(){
-    if (salary >= 1000){
+    let grade
+    if (salary >= maxValue){
         grade = 'middle'
     }
-    else if (salary < 1000) {
+    else if (salary < maxValue) {
         grade = 'junior'
     }
     console.log(grade)
