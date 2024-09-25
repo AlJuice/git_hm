@@ -16,15 +16,18 @@ checkPizzasWithCompetitors(myPizza)
 function checkPizzasWithCompetitors(myPizzas){
     const newMyPizzas = []
     let count = 0
+
     for (let pizza of competitorsPizzas)  {
         pizza = pizza.toLowerCase()
+
         if (myPizzas.includes(pizza)){
             count += 1
+
             if (count === competitorsPizzas.length){
                 newMyPizzas[0] = null
             }
         }
-        else{
+        else {
             newMyPizzas.push(pizza)
         } 
     }
