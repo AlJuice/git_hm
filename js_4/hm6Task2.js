@@ -7,24 +7,19 @@
 // const competitorsPizzas = ['Peperoni', 'Caprichosa', 'Diablo', '4 cheeses', 'hawai']
 
 const competitorsPizzas = ['Peperoni', 'Caprichosa', 'Diablo', '4 cheeses', 'hawai']
-const myPizza = ['peperoni', 'caprichosa', '4 cheeses']
-// const myPizza = ['peperoni', 'caprichosa', 'diablo', '4 cheeses', 'hawai']
-checkPizzasWithCompetitors(myPizza)
+// const myPizzas = ['peperoni', 'caprichosa', '4 cheeses']
+const myPizzas = ['PeperonI', 'Caprichosa', 'diablo', '4 cheeses', 'hawai' ]
+comparePizzasWithCompetitors(myPizzas, competitorsPizzas)
 
-function checkPizzasWithCompetitors(myPizzas){
+function comparePizzasWithCompetitors(arr, arr2){
     const newMyPizzas = []
-    let count = 0
-    for (let pizza of competitorsPizzas)  {
-        pizza = pizza.toLowerCase()
-        if (myPizzas.includes(pizza)){
-            count += 1
-            if (count === competitorsPizzas.length){
-                newMyPizzas[0] = null
-            }
-        }
-        else{
-            newMyPizzas.push(pizza)
-        } 
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].toLowerCase();
     }
-    console.log(newMyPizzas)
+    for (let pizza of arr2)  {
+        if (!(arr.includes(pizza.toLowerCase()))){
+            newMyPizzas.push(pizza)
+        }  
+    }
+    console.log(newMyPizzas.length === 0 ? null: newMyPizzas)
 }

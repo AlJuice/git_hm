@@ -7,17 +7,21 @@
 // - Если элемент нечетный - возведет его в третью степень
 
 const arrayOfNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const finalResult = []
 mathInCycle()
 function mathInCycle(){
     for (let number of arrayOfNumbers){
         if(number % 2 === 0){
-            number = number ** 2
+            finalResult.push(number ** 2)
         }
         else {
-            number = number ** 3
+            finalResult.push(number **  3)
         }
     }
+    console.log(finalResult)
 }
+
+console.log(`----------- Next hm ---------------`)
 
 // 2. Методы массивов
 // Создайте массив [1, 2, 3, 4, 5]
@@ -36,6 +40,7 @@ function methodsArray(){
 }
 methodsArray()
 console.log(arrOfNumbers)
+
 console.log(`----------- Next hm ---------------`)
 
 // 3. Деструктуризация массивов
@@ -48,6 +53,7 @@ const [first, second, ...rest] = arrNumbers
 console.log(first)
 console.log(second)
 console.log(rest)
+
 console.log(`----------- Next hm ---------------`)
 
 // 4. Конкатенация массивов
