@@ -15,7 +15,6 @@ function unique(arrayNumbers) {
         uniqueArray.push(number);
       }
     }
-    return uniqueArray;
+    console.log(uniqueArray)
 }
-console.log(uniqueArray)
   
