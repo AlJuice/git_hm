@@ -20,8 +20,7 @@ function mathInCycle(){
     }
     console.log(finalResult)
 }
-
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 2. Методы массивов
 // Создайте массив [1, 2, 3, 4, 5]
@@ -40,8 +39,7 @@ function methodsArray(){
 }
 methodsArray()
 console.log(arrOfNumbers)
-
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 3. Деструктуризация массивов
 // - Создайте массив из 5 любых чисел 
@@ -53,8 +51,7 @@ const [first, second, ...rest] = arrNumbers
 console.log(first)
 console.log(second)
 console.log(rest)
-
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 4. Конкатенация массивов
 // - Создайте массив с числами [1, 2, 3, 4, 5]
@@ -66,3 +63,9 @@ const numbers = [1, 2, 3, 4, 5]
 const numbers2 = [6, 7, 8, 9, 10]
 const mergedArray = [...numbers, ...numbers2]
 console.log(mergedArray)
+
+
+
+function separateLogs(){
+    console.log(`----------- Next hm ---------------`)
+};

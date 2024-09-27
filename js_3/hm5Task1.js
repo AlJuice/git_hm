@@ -23,7 +23,7 @@ function findEvenNumbers(startNumber){
         }
     }
 }
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 1 задание версия 2
 findEvenNumbers(10)
@@ -32,7 +32,7 @@ function findEvenNumbers(startNumber){
         console.log(index)
     }
 }
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 2 задание
 printSmiles()
@@ -42,7 +42,7 @@ function printSmiles(){
         console.log(smile.repeat(i));
     }
 }
-console.log(`----------- Next hm ---------------`)
+separateLogs()
 
 // 3 задание
 let text = 'Hello! I am a JS student!'
@@ -53,6 +53,9 @@ function removeAllSpaces(text){
 
 
 
+function separateLogs(){
+    console.log(`----------- Next hm ---------------`)
+};
 
 
 
