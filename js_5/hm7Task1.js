@@ -6,6 +6,7 @@
 // - Например: mergeArrays([1,2], [3, 4], [5, 6])   // [1, 2, 3, 4, 5, 6]
 // - Решить с использованием spread оператор
 
+// Task 1 ver 1
 const arrayOfNumbers1 = [1, 2]
 const arrayOfNumbers2 = [3, 4]
 const arrayOfNumbers3 = [5, 6]
@@ -20,6 +21,13 @@ function mergeArrays(...array){
     return newMergedArr
 }
 
+// Task 1 ver 2 через concat
+console.log(mergeArrays2(arrayOfNumbers1, arrayOfNumbers2, arrayOfNumbers3));
+function mergeArrays2(...arrayOfArrays) {
+    let finalArray = [];
+    return finalArray.concat(...arrayOfArrays);
+  }
+
 separateLogs()
 
 // 2. Devide by _
@@ -30,7 +38,6 @@ separateLogs()
 let mySentence = 'I am super engineer'
 
 console.log(devideSentenceBy_(mySentence))
-
 function devideSentenceBy_(words){
     words = words.split(' ')
     for (let i = 0; i < words.length; i++) {

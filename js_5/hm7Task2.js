@@ -6,19 +6,19 @@
 // можно решить через метод .reverse()
 
 const myWord = 'Топот'
-checkWordPalindrom(myWord)
+checkWordPalindrom(myWord) == true ? console.log(`The word: ${myWord} - is a palindrom`)
+                                   : console.log(`The word: ${myWord} - is not a palindrom`)
 
 // сократили функцию до необходимого минимума
 function checkWordPalindrom(word){
     word = word.toLowerCase().split('')
-    for (let i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length /2 ; i++) {
         if (word[i] !== word[(word.length - 1) - i]){
             return false
         }
     }
     return true
 }
-
 
 // function checkWordPalindrom(word){
 //     word = word.toLowerCase().split('')
@@ -32,15 +32,8 @@ function checkWordPalindrom(word){
 //         }
 //     }
 //     if (count == word.length){
-//         logWord(true, myWord)
-//     } else {
-//         logWord(false, myWord)
-//     }
-// }
-// function logWord(boolean, word){
-//     if (boolean){
 //         console.log(`The word: ${word} - is a palindrom` )
-//     } else{
+//     } else {
 //         console.log(`The word: ${word} - is not a palindrom` )
 //     }
 // }
@@ -56,23 +49,23 @@ console.log(checkMaxWordInSentence(mySentence))
 
 function checkMaxWordInSentence(sentence){
     sentence = sentence.trim().split(' ')
-    const arrayForCompare = []
-    const arrayForMaxWords = []
+    const arrayCompare = []
+    const arrayMaxWords = []
     let maxValue = 0
 
     for (let index = 0; index < sentence.length; index++) {
-        arrayForCompare.push(sentence[index].length)
-        let currentValue = arrayForCompare[index]
+        arrayCompare.push(sentence[index].length)
+        let currentValue = arrayCompare[index]
 
         if (maxValue < currentValue){
             maxValue = currentValue
         }
         else if (maxValue == currentValue){
-            arrayForMaxWords.push(sentence[index])
+            arrayMaxWords.push(sentence[index])
         }
     }
-    arrayForMaxWords.push(sentence[arrayForCompare.indexOf(maxValue)])
-    return arrayForMaxWords
+    arrayMaxWords.push(sentence[arrayCompare.indexOf(maxValue)])
+    return arrayMaxWords
 }
 
 

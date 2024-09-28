@@ -8,7 +8,7 @@ const maxAge = 60
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 function controlAge(age){
-    if (parseInt(age) in numbers || typeof age == "number"){
+    if (parseInt(age) in numbers || !isNaN(age)){
         if (age < minAge) {
             console.log(`You don't have access, 'cause your age is ${age}, and it's less than ${minAge}`)
         }

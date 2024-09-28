@@ -7,15 +7,20 @@
 const salary = 1000
 const maxValue = 1000
 
-function checkGrades(){
-    let grade
-    if (salary >= maxValue){
-        grade = 'middle'
-    }
-    else if (salary < maxValue) {
-        grade = 'junior'
-    }
-    console.log(grade)
+console.log(checkGrades(salary, maxValue))
+
+function checkGrades(salary, maxValue){
+    let grade = salary >= maxValue ? 'middle' : 'junior';
+    return grade
 }
 
-checkGrades()
+// function checkGrades(){
+//     let grade
+//     if (salary >= maxValue){
+//         return grade = 'middle'
+//     }
+//     else if (salary < maxValue) {
+//         return grade = 'junior'
+//     }
+// }
+
