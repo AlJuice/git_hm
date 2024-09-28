@@ -1,35 +1,49 @@
 "use strict";
 
 // 1. Написать функцию, которая принимает на вход слово и проверяет, является ли это слово палиндромом
+// А также в этой задаче есть еще 2 момента:
+// если мы идем циклами - нужно ли нам идти по всей длине слова, или остановиться можно на середине?) мы ведь с двухсторон проверяем)
+// можно решить через метод .reverse()
 
 const myWord = 'Топот'
 checkWordPalindrom(myWord)
 
+// сократили функцию до необходимого минимума
 function checkWordPalindrom(word){
     word = word.toLowerCase().split('')
-    let count = 0
     for (let i = 0; i < word.length; i++) {
-        let startLetter = word[i]
-        let endLetter = word[(word.length - 1) - i]
-
-        if (startLetter === endLetter){
-            count += 1
+        if (word[i] !== word[(word.length - 1) - i]){
+            return false
         }
     }
-    if (count == word.length){
-        logWord(true, myWord)
-    } else {
-        logWord(false, myWord)
-    }
+    return true
 }
 
-function logWord(boolean, word){
-    if (boolean){
-        console.log(`The word: ${word} - is a palindrom` )
-    } else{
-        console.log(`The word: ${word} - is not a palindrom` )
-    }
-}
+
+// function checkWordPalindrom(word){
+//     word = word.toLowerCase().split('')
+//     let count = 0
+//     for (let i = 0; i < word.length; i++) {
+//         let startLetter = word[i]
+//         let endLetter = word[(word.length - 1) - i]
+
+//         if (startLetter === endLetter){
+//             count += 1
+//         }
+//     }
+//     if (count == word.length){
+//         logWord(true, myWord)
+//     } else {
+//         logWord(false, myWord)
+//     }
+// }
+// function logWord(boolean, word){
+//     if (boolean){
+//         console.log(`The word: ${word} - is a palindrom` )
+//     } else{
+//         console.log(`The word: ${word} - is not a palindrom` )
+//     }
+// }
 
 separateLogs()
 

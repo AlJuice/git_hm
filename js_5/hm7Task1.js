@@ -11,11 +11,11 @@ const arrayOfNumbers2 = [3, 4]
 const arrayOfNumbers3 = [5, 6]
 
 console.log(mergeArrays(arrayOfNumbers1, arrayOfNumbers2, arrayOfNumbers3))
-
+// лучше использовать цикл for..of для тех случаев, когда доступ к индексу не принципиален 
 function mergeArrays(...array){
     let newMergedArr = []
-    for (let index = 0; index < array.length; index++) {
-        newMergedArr.push(...array[index]) 
+    for (const el of array){
+        newMergedArr.push(...el) 
     }
     return newMergedArr
 }
@@ -56,16 +56,22 @@ let number = 8
 console.log(fibanacci(number))
 
 function fibanacci(num){
-    const arrayNumbers = [0, 1]
-    for (let i = 0; i < num; i++) {
-        let currentNumber = arrayNumbers[i]
-        let nextNumber = arrayNumbers[i+1]
-
-        if (currentNumber + nextNumber == currentNumber + nextNumber){
-            arrayNumbers.push(currentNumber + nextNumber)
+    // добавлена проверка на то, что число не равно 0, является точно числом и с целочисленным значением
+    if (num !== 0 && Number.isFinite(num) == true && Number.isInteger(num) == true){
+        const arrayNumbers = [0, 1]
+        for (let i = 0; i < num; i++) {
+            let currentNumber = arrayNumbers[i]
+            let nextNumber = arrayNumbers[i+1]
+    
+            if (currentNumber + nextNumber == currentNumber + nextNumber){
+                arrayNumbers.push(currentNumber + nextNumber)
+            }
         }
+        return  arrayNumbers[num]
     }
-    return  arrayNumbers[num]
+    else {
+        return `${num} не является целочисленным числом, или равняется 0`
+    }
 }
 
 function separateLogs(){
