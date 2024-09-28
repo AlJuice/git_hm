@@ -9,6 +9,7 @@
 const competitorsPizzas = ['Peperoni', 'Caprichosa', 'Diablo', '4 cheeses', 'hawai']
 // const myPizzas = ['peperoni', 'caprichosa', '4 cheeses']
 const myPizzas = ['PeperonI', 'Caprichosa', 'diablo', '4 cheeses', 'hawai' ]
+
 comparePizzasWithCompetitors(myPizzas, competitorsPizzas)
 
 function comparePizzasWithCompetitors(arr, arr2){

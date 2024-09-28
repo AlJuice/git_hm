@@ -15,7 +15,7 @@ const minAge = 18
 const maxAge = 60
 
 function controlAge(age){
-    if (typeof age != "number"){
+    if (isNaN(age)){ // проверяет, является ли аргумент числом, и если да, то проверяет, является ли оно NaN.
         console.log("Incorrect data type")
     }
     else {
