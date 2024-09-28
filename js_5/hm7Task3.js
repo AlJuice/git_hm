@@ -33,3 +33,20 @@ function recursiveSummOfNumber(number){
         }
     }
 }
+
+console.log('-------------- Version 2 ---------------')
+
+console.log(recursiveSummOfNumber2(19))
+function recursiveSummOfNumber2(number){
+    let summ = 0
+    if (number <= 9){
+        return number
+    }
+    else {
+        for (const el of String(number)){
+            summ += +el
+        }
+        return recursiveSummOfNumber2(summ)
+    }
+
+}
