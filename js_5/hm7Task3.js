@@ -5,16 +5,14 @@
 // После окончания сложений возвращает полученное число. 
 // Например при подаче числа 19 (1 + 9 = 10 > 9, потому 1 + 0 = 1) и выводится 1
 
+let summ = 0
 console.log(recursiveSummOfNumber(19))
 
-let summ = 0
 function recursiveSummOfNumber(number){
-
     if (summ <= 9 && summ != 0){
         return number
     }
     else { 
-        console.log(String(number).length)
         // если число трехзначное
         if (String(number).length > 2){
             // если число четырехзначное
