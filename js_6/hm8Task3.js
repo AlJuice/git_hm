@@ -18,5 +18,5 @@ function findMissingNumber(arr){
 }
 
 function sortedArrAsc(arr = []){
-    return sortedArrAsc = arr.toSorted((a, b) => a - b)
+    return arr.toSorted((a, b) => a - b)
 }

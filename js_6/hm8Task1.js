@@ -15,7 +15,7 @@ separateLogs(1)
 arrOfNumber.forEach(el => el % 3 == 0 ? console.log(el) : null)
 
 separateLogs(2)
-const subtractArrayLength = arrOfNumber.map(el => el - arrOfNumber.length)
+const subtractArrayLength = arrOfNumber.map((el, index, array) => el - array.length)
 console.log(subtractArrayLength)
 
 separateLogs(3)
@@ -43,7 +43,7 @@ const ifElementOver90 = arrOfNumber.some(el => el > 90)
 console.log(ifElementOver90)
 
 separateLogs(8)
-const allElementsDoubleDigits = arrOfNumber.every(element => String(element).length > 1)
+const allElementsDoubleDigits = arrOfNumber.every(element => (element >= 10) && String(element).length == 2 )
 console.log(allElementsDoubleDigits)
 
 function separateLogs(num){
