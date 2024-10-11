@@ -17,8 +17,8 @@ const characters = [
 ]
 
 separateLogs(1.1)
-function addCharacter(arr = [], character){
-    return arr.push(character)
+function addCharacter(arr = [], character = {}){
+    arr.push(character)
 }
 addCharacter(characters, { 'name': 'Alina', 'age': 28 })
 console.log(characters)
@@ -38,14 +38,15 @@ console.log(characters)
 
 
 separateLogs(2.1)
-function getCharacter(arr = [], name = String){
+function getCharacter(arr = [], name){
     return arr.find(el => el['name'] == name)
  }
  console.log(getCharacter(characters, 'Fred'))
 
+
  
 separateLogs(2.2)
-function getCharacter2(arr = [], name = String){
+function getCharacter2(arr = [], name){
    return arr.reduce((res, el) => {
         if (Object.keys(el).find(key => el[key] === name)){
             res.push(el)
@@ -56,8 +57,8 @@ function getCharacter2(arr = [], name = String){
 console.log(getCharacter2(characters, 'Alina'))
 
 
-separateLogs(3)
-function getCharactersByAge(arr = [], minAge = Number){
+separateLogs(3.1)
+function getCharactersByAge(arr = [], minAge){
     return arr.reduce((res, el) => {
      if (Object.keys(el).find(key => el[key] >= minAge)){
             res.push(el)
@@ -66,6 +67,13 @@ function getCharactersByAge(arr = [], minAge = Number){
     }, [])
 }
 console.log(getCharactersByAge(characters, 40))
+
+
+separateLogs(3.2)
+function getCharactersByAge2(arr = [], minAge){
+    return arr.filter(el => Object.keys(el).find(key => el[key] >= minAge))
+}
+console.log(getCharactersByAge2(characters, 40))
 
 
 separateLogs(4)
