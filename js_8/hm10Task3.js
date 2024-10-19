@@ -7,47 +7,45 @@
 // Например, n = 5, функция выведет 5 чисел 1-5, а после будет выводить сугубо 'All numbers were received'
 // Рекомендации: для генерации числа в границах воспользуйтесь методом getRandomArbitrary
 
-
-// чет пока что не осилила, возможно вернусь позже к этому заданию
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min
 }
 
 function generateNumbers(number){
-    const hasBeenNumbers = []
-    let randomNumber
+    const allNumbers = new Set()
+    let hasSeenNumbers = 0
 
     return function() {
-        if (hasBeenNumbers.length >= number){
+        if (hasSeenNumbers >= number){
             return 'All numbers were received'
         }
-        else {
-            console.log('before while')
-            console.log("hasBeenNumbers", hasBeenNumbers)
-            do {
-                console.log('do')
-                randomNumber = Math.round(getRandomArbitrary(1, number)) 
-                hasBeenNumbers.push(randomNumber)
-                console.log("randomNumber", randomNumber)
-                console.log("hasBeenNumbers", hasBeenNumbers)
-            }
-            while (!(hasBeenNumbers.includes(randomNumber))) {
-                console.log('while')
-                // randomNumber = Math.round(getRandomArbitrary(1, number)) 
-                // console.log("randomNumber", randomNumber)
-                // hasBeenNumbers.push(randomNumber)
-                // console.log("hasBeenNumbers", hasBeenNumbers)
-            }
 
-            // hasBeenNumbers.push(randomNumber)
-            console.log("hasBeenNumbers", hasBeenNumbers)
-            return randomNumber
+        else {
+            let randomNumber = Math.round(getRandomArbitrary(1, number))
+            if (!allNumbers.has(randomNumber) && allNumbers.size <= number){
+                allNumbers.add(randomNumber)
+                hasSeenNumbers++
+                return randomNumber
+            }
+            else {
+                while (allNumbers.has(randomNumber) && allNumbers.size <= number){
+                    randomNumber = Math.round(getRandomArbitrary(1, number))
+                }
+                allNumbers.add(randomNumber)
+                hasSeenNumbers++
+                return randomNumber
+            }
         }
     }
 }
 
 const randomGenerator = generateNumbers(5);
 
+console.log(randomGenerator())
+console.log(randomGenerator())
+console.log(randomGenerator())
+console.log(randomGenerator())
+console.log(randomGenerator())
 console.log(randomGenerator())
 
 
