@@ -32,7 +32,7 @@ class Employee {
         this.firstName = firstName; // вызывается сеттер
         this.lastName = lastName; 
         this.profession = profession; 
-        this.salary = salary; 
+        this.#salary = salary; 
     }
 
     get firstName(){
@@ -41,7 +41,7 @@ class Employee {
 
     set firstName(firstName){
         const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
-        if (typeof firstName != 'string' || firstName.length < 2 || firstName.length > 50 
+        if (typeof firstName !== 'string' || firstName.length < 2 || firstName.length > 50 
                                          || !firstName.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid firstName value')
         }
@@ -54,7 +54,7 @@ class Employee {
 
     set lastName(lastName){
         const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
-        if (typeof lastName != 'string' || lastName.length < 2 || lastName.length > 50
+        if (typeof lastName !== 'string' || lastName.length < 2 || lastName.length > 50
                                         || !lastName.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid lastName value')
         }
@@ -68,7 +68,7 @@ class Employee {
     set profession(profession){
         const latinLetters = 'abcdefghijklmnopqrstuvwxyz '
 
-        if (typeof profession != 'string' || profession.length === 0
+        if (typeof profession !== 'string' || profession.length === 0
                                           || !profession.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid profession value')
         }
@@ -80,7 +80,7 @@ class Employee {
     }
 
     set salary(salary){
-        if (typeof salary != 'number' || salary <= 0 || salary > 100000){
+        if (typeof salary !== 'number' || salary <= 0 || salary > 100000){
             throw new Error('Invalid salary value')
         }
         this.#salary = salary
@@ -93,11 +93,11 @@ class Employee {
 
 class Company {
     #employees = []
-    constructor(title, phone, address, employees){
+    constructor(title, phone, address, employees = []){
         this.title = title
         this.phone = phone
         this.address = address
-        this.employees = employees
+        this.addEmployee(employees) 
     }
 
     get title(){
@@ -105,7 +105,7 @@ class Company {
     }
 
     set title(title){
-        if (typeof title != 'string'){
+        if (typeof title !== 'string'){
             throw new Error('Invalid title value')
         }
         this._title = title
@@ -116,7 +116,7 @@ class Company {
     }
 
     set phone(phone){
-        if (typeof phone != 'number'){
+        if (typeof phone !== 'number'){
             throw new Error('Invalid phone value')
         }
         this._phone = phone
@@ -127,20 +127,19 @@ class Company {
     }
 
     set address(address){
-        if (typeof address != 'string'){
+        if (typeof address !== 'string'){
             throw new Error('Invalid address value')
         }
         this._address = address
     }
 
-    addEmployee(employee){
+    addEmployee(employee = []){
         if (employee instanceof Employee){
             this.#employees.push(employee)
         }
         else {
             return `object ${employee} is not the instance of class Employee`
         }
-
     }
 
     getEmployees(){
@@ -161,9 +160,8 @@ class Company {
         if (employeeIndex === -1){
             return `this employee ${firstName} hasn't found in our company!`
         }
-        else {
-            delete this.#employees[employeeIndex]
-        }
+        this.#employees.splice(employeeIndex, 1)
+
     }
 
     #getEmployeeIndex(firstName){
@@ -171,10 +169,7 @@ class Company {
     }
 
     getTotalSalary(){        
-        return company.getEmployees().reduce((acc, el, index, arr) => {
-            acc += el.salary
-            return acc
-        }, 0)
+        return company.getEmployees().reduce((acc, el) => acc += el.salary, 0)
     }
 }
 
