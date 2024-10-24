@@ -1,15 +1,5 @@
 "use strict";
 
-// 1. Напишите функцию addCharacter(character), позволяющую добавить новый объект в массив characters
-// 2. Напишите функцию getCharacter(name), позволяющую получить объект персонажа по его имени
-// getCharacter(fred) => {'name':'Fred', 'age': 40}
-// 3. Напишите функцию getCharactersByAge(minAge), возвращающую массив персонажей НЕ МЛАДЩЕ minAge
-// getCharactersByAge(40) => [{name':'Fred', 'age': 40}, {'name': 'Jack', 'age': 50}]
-// 4. Напишите функцию updateCharacter(name, newCharacter) - методом getCharacter(name) получаем ссылку на нужного
-// персонажа, а потом меняем ему данные
-// 5. Напишите функцию для удаления персонажа removeCharacter(name)
-// Реализовать через splice, индекс персонажа искать методом findIndex
-
 const characters = [
     { 'name': 'Barney', 'age': 36 },
     { 'name': 'Fred', 'age': 40 },
