@@ -1,9 +1,5 @@
 "use strict";
 
-// Создать программу, которая будет принимать на вход СЛОВО (создавать переменную со словом), и
-// выводить в консоль количество гласных и согласных букв в этом слове
-// Пример: word contains x vowels and y consonants
-
 function countWord(word){
     let countVowels = 0, 
         countConsonants = 0

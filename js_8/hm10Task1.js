@@ -1,22 +1,6 @@
 "use strict";
 
 // 1. Context
-// - Создайте объект qa с полями name, age, salary и методом getInfo(greetingsWorld), который будет возвращать строку вида:
-// `${greetingsWord}, my name is ${name}, I'm ${age} and my salary is ${salary}`
-// Значения в строке должны ссылаться на контекст этого объекта, без подмен
-// 2. Changing the context
-// - Создайте объект anotherQA с полями name, age, salary, значения в которых будут отличны от объекта qa
-// - Вызовите метод getInfo объекта qa с контекстом вызова объекта anotherQA с помощью метода bind()
-// - Вызовите метод getInfo объекта qa с контекстом вызова объекта anotherQA с помощью метода call()
-// - Вызовите метод getInfo объекта qa с контекстом вызова объекта anotherQA с помощью метода apply()
-// 3. Closures
-// - Создайте функцию createCounter(),
-// - Создайте в функции createCounter переменную count, которая будет равна 0
-// - Верните из функции createCounter новую функцию
-// - В теле новой функции реализуйте увеличение count на +1 при каждом вызове функции
-// - После увеличения каунтера выводите в консоль `Function was called ${count} times`
-// - Создайте переменную functionCallCounter, в которой будет лежать результат createCounter()
-// - Вызовите functionCallCounter() 5 раз, убедитесь что в консоли верно выводятся данные
 
 separateLogs(1.1)
 const qa = {
@@ -44,6 +28,8 @@ const qa2 = {
 console.log(qa2.getInfo("Hello"))
 
 
+// 2. Changing the context
+
 separateLogs(2)
 const anotherQA = {
     name: 'Aleks',
@@ -55,6 +41,7 @@ console.log(qa.getInfo.bind(anotherQA)("Hi there - bind"))
 console.log(qa.getInfo.call(anotherQA, "Hi there - call"))
 console.log(qa.getInfo.apply(anotherQA, ["Hi there - apply"]))
 
+// 3. Closures
 
 separateLogs(3)
 
