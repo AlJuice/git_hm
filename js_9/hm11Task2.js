@@ -1,4 +1,5 @@
 "use strict";
+
 class Employee {
     #salary
     constructor(firstName, lastName, profession, salary) {
@@ -13,7 +14,9 @@ class Employee {
     }
 
     set firstName(firstName){
-        if (typeof firstName !== 'string'){
+        const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
+        if (typeof firstName !== 'string' || firstName.length < 2 || firstName.length > 50 
+                                         || !firstName.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid firstName value')
         }
         this._firstName = firstName
@@ -24,7 +27,9 @@ class Employee {
     }
 
     set lastName(lastName){
-        if (typeof lastName !== 'string'){
+        const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
+        if (typeof lastName !== 'string' || lastName.length < 2 || lastName.length > 50
+                                        || !lastName.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid lastName value')
         }
         this._lastName = lastName
@@ -35,7 +40,10 @@ class Employee {
     }
 
     set profession(profession){
-        if (typeof profession !== 'string'){
+        const latinLetters = 'abcdefghijklmnopqrstuvwxyz '
+
+        if (typeof profession !== 'string' || profession.length === 0
+                                          || !profession.toLowerCase().split('').every(el => latinLetters.includes(el))){
             throw new Error('Invalid profession value')
         }
         this._profession = profession
@@ -46,7 +54,7 @@ class Employee {
     }
 
     set salary(salary){
-        if (typeof salary !== 'number'){
+        if (typeof salary !== 'number' || salary <= 0 || salary > 100000){
             throw new Error('Invalid salary value')
         }
         this.#salary = salary
@@ -100,10 +108,12 @@ class Company {
     }
 
     addEmployee(employee = []){
-        if (!(employee instanceof Employee)){
+        if (employee instanceof Employee){
+            this.#employees.push(employee)
+        }
+        else {
             return `object ${employee} is not the instance of class Employee`
         }
-        this.#employees.push(employee)
     }
 
     getEmployees(){
@@ -113,17 +123,42 @@ class Company {
     getInfo(){
         return `Компания: ${this.title} \nАдрес: ${this.address} \nКоличество сотрудников: ${this.#employees.length}`
     }
+
+    findEmployeeByName(firstName){
+        return this.#employees.find(el => el._firstName === firstName)
+
+    }
+
+    removeEmployee(firstName){
+        const employeeIndex = this.#getEmployeeIndex(firstName)
+        if (employeeIndex === -1){
+            return `this employee ${firstName} hasn't found in our company!`
+        }
+        this.#employees.splice(employeeIndex, 1)
+
+    }
+
+    #getEmployeeIndex(firstName){
+        return this.#employees.findIndex(el => el._firstName === firstName)
+    }
+
+    getTotalSalary(){        
+        return company.getEmployees().reduce((acc, el) => acc += el.salary, 0)
+    }
 }
 
+const emp1 = new Employee('John', 'Doe', "Developer", 3000)
+const emp2 =  new Employee('Jane', 'Smith', "Manager", 5000)
+const emp3 =  new Employee('Mark', 'Brown', "Designer", 4000)
+
 // const company = new Company('Tech Corp', '123-456', 'Main Street') // вызывается ошибка, тк тип phone должен быть number!
-const company = new Company('Tech Corp', 123456, 'Main Street') // 
-console.log(company.phone) // 123456
-const emp1 = new Employee('John', 'Doe', 'Dev', 3000)
-console.log(emp1.firstName) // John
-emp1.salary = 3100
-console.log(emp1.salary) // 3100
-const emp2 = new Employee('Barbara', 'Johnson', 'QA', 2500)
+const company = new Company('Tech Corp', 123456, 'Main Street')
+
 company.addEmployee(emp1)
 company.addEmployee(emp2)
+company.addEmployee(emp3)
+
+console.log(company.getTotalSalary()) // 12000
+console.log(company.findEmployeeByName("Jane")) // Employee { firstName: 'Jane, ...}
+company.removeEmployee('John')
 console.log(company.getEmployees()) // [Employee, Employee]
-console.log(company.getInfo()) 
