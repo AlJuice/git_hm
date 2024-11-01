@@ -2,6 +2,7 @@
 
 class Employee {
     #salary
+    #latinLetters = 'abcdefghijklmnopqrstuvwxyz'
     constructor(firstName, lastName, profession, salary) {
         this.firstName = firstName; // вызывается сеттер
         this.lastName = lastName; 
@@ -14,9 +15,8 @@ class Employee {
     }
 
     set firstName(firstName){
-        const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
         if (typeof firstName !== 'string' || firstName.length < 2 || firstName.length > 50 
-                                         || !firstName.toLowerCase().split('').every(el => latinLetters.includes(el))){
+                                         || !firstName.toLowerCase().split('').every(el => this.#latinLetters.includes(el))){
             throw new Error('Invalid firstName value')
         }
         this._firstName = firstName
@@ -27,9 +27,8 @@ class Employee {
     }
 
     set lastName(lastName){
-        const latinLetters = 'abcdefghijklmnopqrstuvwxyz'
         if (typeof lastName !== 'string' || lastName.length < 2 || lastName.length > 50
-                                        || !lastName.toLowerCase().split('').every(el => latinLetters.includes(el))){
+                                        || !lastName.toLowerCase().split('').every(el => this.#latinLetters.includes(el))){
             throw new Error('Invalid lastName value')
         }
         this._lastName = lastName
@@ -40,10 +39,8 @@ class Employee {
     }
 
     set profession(profession){
-        const latinLetters = 'abcdefghijklmnopqrstuvwxyz '
-
         if (typeof profession !== 'string' || profession.length === 0
-                                          || !profession.toLowerCase().split('').every(el => latinLetters.includes(el))){
+                                          || !profession.toLowerCase().split('').every(el => this.#latinLetters.includes(el))){
             throw new Error('Invalid profession value')
         }
         this._profession = profession
