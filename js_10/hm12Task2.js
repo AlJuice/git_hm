@@ -8,7 +8,7 @@ async function createTodo(body = {}){
             },
             body: JSON.stringify(body)
         })
-        if (response.status !== 200 && response.status !== 201) throw new Error('Status response isnt 200 or 201!')
+        if (response.status !== 200 && response.status !== 201) throw new Error(response.statusText, { cause: response.status })
         const data = await response.json()
         for (const key in body) { // все, что есть в object body, который мы посылаем
             if (!(key in data)){ // ключи, которые есть в object data, который мы получаем от бэка
@@ -21,7 +21,7 @@ async function createTodo(body = {}){
         return data;
     }
     catch (err){
-        console.error(`Response failed with error: "${err.message}"`)
+        console.error(`Response failed with error: "${err.message}", reponse code: "${err.cause}"`)
     }
     finally {
         console.log('Function finished')

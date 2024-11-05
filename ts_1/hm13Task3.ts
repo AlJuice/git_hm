@@ -28,11 +28,11 @@ interface IOrder {
 }
 
 function calculateTotal(order: IOrder) {
-    return order.items.reduce((acc, item) => {
-        if (item.product.discount) {
-            return acc + (item.product.price * (1 - item.product.discount / 100)) * item.quantity
+    return order.items.reduce((acc, { product: { discount, price }, quantity }) => {
+        if (discount) {
+            return acc + (price * (1 - discount / 100)) * quantity
         }
-        return acc + item.product.price * item.quantity
+        return acc + price * quantity
     }, 0)
 }
 

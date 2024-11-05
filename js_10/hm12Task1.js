@@ -1,8 +1,10 @@
 "use strict";
 
 function delayTwoSeconds(){
-    setTimeout(() => {}, 2000)
+    setTimeout(() => console.log("Delay completed!"), 2000)
 }
+
+delayTwoSeconds()
 
 const promiseResolve1 = Promise.resolve(1).then((result) => console.log(result))
 const promiseRejected = Promise.reject("Promise failed").catch((result) => console.log(result))
