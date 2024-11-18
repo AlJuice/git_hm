@@ -1,5 +1,3 @@
-"use strict";
-
 interface IEmployee {
     name: string, 
     salary: number, 

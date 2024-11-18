@@ -1,5 +1,3 @@
-"use strict";
-
 interface IVehicle {
     getDetails(): string
     start(): string 

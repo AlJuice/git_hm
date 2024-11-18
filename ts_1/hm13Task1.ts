@@ -1,5 +1,3 @@
-"use strict";
-  
 separateLogs(1)
 
 const num1: number = 42
