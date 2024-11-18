@@ -1,12 +1,12 @@
 // Тут будут храниться ваши стоимости дополнений к пиццам, вида название: цена, например bacon: 5
 export const TOPPINGS = {
-  bacon: 5, 
+  bacon: 5,
   chicken: 11,
-  pepperoni: 6, 
+  pepperoni: 6,
   sausage: 8,
   meat: 15,
-  cheese: 7, 
-  mushrooms: 4, 
+  cheese: 7,
+  mushrooms: 4,
   olives: 3,
   onions: 2,
   garlic: 3,

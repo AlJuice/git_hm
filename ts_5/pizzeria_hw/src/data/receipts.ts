@@ -1,17 +1,20 @@
-import { PIZZA_SIZE, toppingsType  } from '../data/types';
+import { PIZZA_SIZE, toppingsType } from '../data/types';
 
 //Енам с названиями ваших пицц
 export enum PIZZA_NAMES {
-  MARGHERITA = "Margherita",
-  PEPPERONI = "Pepperoni",
-  HAWAIIAN = "Hawaiian",
-  FOURCHEESES = "Four Cheeses",
-  DIABLO = "Diablo",
-  MEAT = "Meat", 
-  VEGGIE = "Veggie"
-} 
+  MARGHERITA = 'Margherita',
+  PEPPERONI = 'Pepperoni',
+  HAWAIIAN = 'Hawaiian',
+  FOURCHEESES = 'Four Cheeses',
+  DIABLO = 'Diablo',
+  MEAT = 'Meat',
+  VEGGIE = 'Veggie'
+}
 
-export const pizzaReceipts: Record<PIZZA_NAMES, {toppings: toppingsType[], prices: Record<PIZZA_SIZE, number>}> = {
+export const pizzaReceipts: Record<
+  PIZZA_NAMES,
+  { toppings: toppingsType[]; prices: Record<PIZZA_SIZE, number> }
+> = {
   [PIZZA_NAMES.MARGHERITA]: {
     toppings: ['cheese', 'tomatoes'],
     prices: {
@@ -73,6 +76,5 @@ export const pizzaReceipts: Record<PIZZA_NAMES, {toppings: toppingsType[], price
       [PIZZA_SIZE.MEDIUM]: 120,
       [PIZZA_SIZE.LARGE]: 190
     }
-  },
+  }
 };
-

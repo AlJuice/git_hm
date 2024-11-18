@@ -5,23 +5,32 @@ import { ERROR_MESSAGES } from '../data/messages';
 
 export class Order {
   private storageMeals: IMeal[] = [];
-  constructor(public orderNumber: number, public meals: IMeal[] = []) {
-    this.storageMeals.push(...meals)
+  constructor(
+    public orderNumber: number,
+    public meals: IMeal[] = []
+  ) {
+    this.storageMeals.push(...meals);
   }
 
-  addPizza(name: PIZZA_NAMES, basePrice: number, doughType: DOUGH_TYPE, size: PIZZA_SIZE, additionalToppings?: toppingsType[]) {
-    const newPizza =  new Pizza(name, basePrice, doughType, size);
+  addPizza(
+    name: PIZZA_NAMES,
+    basePrice: number,
+    doughType: DOUGH_TYPE,
+    size: PIZZA_SIZE,
+    additionalToppings?: toppingsType[]
+  ) {
+    const newPizza = new Pizza(name, basePrice, doughType, size);
     if (additionalToppings) {
       newPizza.additionalToppings = [...additionalToppings];
     }
     if (!newPizza) throw new Error(ERROR_MESSAGES.PIZZA_NOT_FOUND);
 
     this.storageMeals.push(newPizza);
-    return newPizza
+    return newPizza;
   }
 
   getMeals(): IMeal[] {
-    return this.storageMeals
+    return this.storageMeals;
   }
 
   // Возвращает полную стоимость заказа (сумма стоимости всех блюд)
@@ -30,7 +39,9 @@ export class Order {
   }
 
   removeFromOrder(name: PIZZA_NAMES) {
-    const pizzaIndex = this.storageMeals.findIndex(meal => meal.name === name);
+    const pizzaIndex = this.storageMeals.findIndex(
+      (meal) => meal.name === name
+    );
     if (pizzaIndex === -1) throw new Error(ERROR_MESSAGES.PIZZA_NOT_FOUND);
     this.storageMeals.splice(pizzaIndex, 1);
   }
