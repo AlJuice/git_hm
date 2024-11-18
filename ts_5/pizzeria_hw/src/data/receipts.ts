@@ -11,8 +11,6 @@ export enum PIZZA_NAMES {
   VEGGIE = "Veggie"
 } 
 
-// export type toppingsType = keyof typeof TOPPINGS
-
 export const pizzaReceipts: Record<PIZZA_NAMES, {toppings: toppingsType[], prices: Record<PIZZA_SIZE, number>}> = {
   [PIZZA_NAMES.MARGHERITA]: {
     toppings: ['cheese', 'tomatoes'],
