@@ -1,5 +1,3 @@
-"use strict";
-  
 // Создайте интерфейс IPerson, абстрактный класс Employee, который реализует интерфейс IPerson, и конкретные классы Manager и Developer.
 
 interface IPerson {

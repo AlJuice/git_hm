@@ -1,6 +1,3 @@
-"use strict";
-
-
 class GenericStorage<T extends { id: number }> {
     private storage: T[] = []
 

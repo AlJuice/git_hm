@@ -1,5 +1,3 @@
-"use strict";
-
 function validatePassword (password: string) {
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'
     if (password.length >= 8){
