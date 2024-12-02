@@ -1,8 +1,7 @@
-import { PIZZA_NAMES } from '../data/receipts';
 import { TOPPINGS } from '../data/prices';
 
 export interface IMeal {
-  readonly name: PIZZA_NAMES;
+  readonly name: string; // абстрактный класс должен принимать тоже абстрактные типы данных
   getPrice(): number;
 }
 

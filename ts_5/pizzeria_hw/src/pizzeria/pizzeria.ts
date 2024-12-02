@@ -5,10 +5,10 @@ import { IMeal } from '../data/types';
 export class Pizzeria {
   private storageOrders: Order[] = [];
   constructor(
-    public name: string,
-    public address?: string,
-    public workingHours?: string,
-    public orders?: Order[]
+    protected name: string,
+    protected address?: string,
+    protected workingHours?: string,
+    protected orders?: Order[]
   ) {
     if (orders) this.storageOrders.push(...orders);
   }

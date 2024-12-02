@@ -1,0 +1,15 @@
+{
+  "name": "aga_2",
+  "type": "module",
+  "devDependencies": {
+    "@wdio/allure-reporter": "^9.2.14",
+    "@wdio/cli": "^9.4.1",
+    "@wdio/local-runner": "^9.4.1",
+    "@wdio/mocha-framework": "^9.2.8",
+    "@wdio/spec-reporter": "^9.2.14",
+    "@wdio/visual-service": "^6.2.2"
+  },
+  "scripts": {
+    "test": "npx wdio run ./wdio.conf.ts"
+  }
+}
