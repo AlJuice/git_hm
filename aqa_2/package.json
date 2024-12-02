@@ -1,5 +1,5 @@
 {
-  "name": "aga_2",
+  "name": "aqa_2",
   "type": "module",
   "devDependencies": {
     "@wdio/allure-reporter": "^9.2.14",

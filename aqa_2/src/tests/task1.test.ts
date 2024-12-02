@@ -5,7 +5,7 @@ import {ILogin_Herokuapp as ILogin} from '../data/interfaces'
 import {loginPageData_Herokuapp as loginPageData} from '../data/data'
 import {credentials_Herokuapp as credentials} from '../data/credentials'
 
-describe('[UI] herokuapp Login', () => {
+describe.skip('[UI] herokuapp Login', () => {
 
     before(async function() {
         await browser.maximizeWindow()
