@@ -1,7 +1,9 @@
-
-import {loginPageSelectors_karpovich as loginPageSelectors, registrationPageSelectors_karpovich as registrationPageSelectors} from '../data/locators'
-import {loginMessages_karpovich as loginMessages} from '../data/messages'
-import {credentials_karpovich as credentials} from '../data/credentials'
+import {
+  loginPageSelectors_karpovich as loginPageSelectors,
+  registrationPageSelectors_karpovich as registrationPageSelectors,
+} from "../data/locators";
+import { loginMessages_karpovich as loginMessages } from "../data/messages";
+import { credentials_karpovich as credentials } from "../data/credentials";
 
 describe("[UI] Login Smoke tests", () => {
   before(async function () {
@@ -13,7 +15,7 @@ describe("[UI] Login Smoke tests", () => {
   });
 
   afterEach(async function () {
-    await browser.execute("window.localStorage.clear()"); 
+    await browser.execute("window.localStorage.clear()");
   });
 
   // -------------- REGISTRATION -------------- //
@@ -23,8 +25,8 @@ describe("[UI] Login Smoke tests", () => {
     });
 
     it("Should register with valid credentials", async function () {
-      for (const cred of credentials.validCredentials){
-        it(`${cred.username, cred.password}`, async () => {
+      for (const cred of credentials.validCredentials) {
+        it(`${(cred.username, cred.password)}`, async () => {
           await registerOrLoginUser(
             registrationPageSelectors.usernameInput,
             registrationPageSelectors.passwordInput,
@@ -37,7 +39,7 @@ describe("[UI] Login Smoke tests", () => {
             registrationPageSelectors.errorMessage,
             loginMessages.registrationSuccess
           );
-        })
+        });
       }
     });
   });
@@ -46,41 +48,47 @@ describe("[UI] Login Smoke tests", () => {
   describe("Login Page", () => {
     context("Positive scenarios", () => {
       it("Should login with valid credentials", async function () {
-        for (const cred of credentials.validCredentials){
-          it(`${cred.username, cred.password}`, async () => {
+        for (const cred of credentials.validCredentials) {
+          it(`${(cred.username, cred.password)}`, async () => {
             await registerOrLoginUser(
               loginPageSelectors.usernameInput,
               loginPageSelectors.passwordInput,
               loginPageSelectors.submitButton,
               cred.username,
-              cred.password)
-          
-            await checkSelectorTextWithContain(loginPageSelectors.successMessage, 
-                                               loginMessages.loginSuccess, 
-                                               cred.username)
-            })
-          }
+              cred.password
+            );
+
+            await checkSelectorTextWithContain(
+              loginPageSelectors.successMessage,
+              loginMessages.loginSuccess,
+              cred.username
+            );
+          });
+        }
       });
-    })
+    });
 
     context("Negative scenarios", () => {
       it("Should failed login with invalid credentials", async function () {
-        for (const cred of credentials.invalidCredentials){
-          it(`${cred.username, cred.password, cred.message}`, async () => {
+        for (const cred of credentials.invalidCredentials) {
+          it(`${(cred.username, cred.password, cred.message)}`, async () => {
             await registerOrLoginUser(
               loginPageSelectors.usernameInput,
               loginPageSelectors.passwordInput,
               loginPageSelectors.submitButton,
               cred.username,
-              cred.password)
-          
-            await checkSelectorTextWithContain(loginPageSelectors.successMessage, 
-                                               cred.message, 
-                                               cred.username)
-            })
-          }
+              cred.password
+            );
+
+            await checkSelectorTextWithContain(
+              loginPageSelectors.successMessage,
+              cred.message,
+              cred.username
+            );
+          });
+        }
       });
-    })
+    });
   });
 });
 
@@ -96,11 +104,15 @@ async function registerOrLoginUser(
   await $(buttonSelector).click();
 }
 
-async function checkSelectorTextWithContain(selector: string, message: string, data?: string) {
-    if (data) {
-      expect(await $(selector).getText()).toContain(message + data);
-    } 
-    expect(await $(selector).getText()).toContain(message);
+async function checkSelectorTextWithContain(
+  selector: string,
+  message: string,
+  data?: string
+) {
+  if (data) {
+    expect(await $(selector).getText()).toContain(message + data);
+  }
+  expect(await $(selector).getText()).toContain(message);
 }
 
 // Разработайте смоук тест-сьют с тестами на LOGIN на странице https://anatoly-karpovich.github.io/demo-login-form/
