@@ -2,10 +2,10 @@ import { IMeal } from '../data/types';
 import { PIZZA_NAMES } from '../data/receipts';
 
 export abstract class Meal implements IMeal {
-  public finalPrice: number;
+  protected finalPrice: number;
   constructor(
     readonly name: PIZZA_NAMES,
-    public basePrice: number
+    protected basePrice: number
   ) {
     this.finalPrice = this.calculatePrice();
   }

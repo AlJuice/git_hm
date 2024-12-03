@@ -4,7 +4,7 @@ import { Meal } from './meal';
 import { TOPPINGS } from '../data/prices';
 
 export class Pizza extends Meal {
-  public finalPrice: number;
+  protected finalPrice: number;
 
   constructor(
     readonly name: PIZZA_NAMES,
