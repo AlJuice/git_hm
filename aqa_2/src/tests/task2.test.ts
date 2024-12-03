@@ -24,70 +24,64 @@ describe("[UI] Login Smoke tests", () => {
       await $(loginPageSelectors.registerButton).click();
     });
 
-    it("Should register with valid credentials", async function () {
-      for (const cred of credentials.validCredentials) {
-        it(`${(cred.username, cred.password)}`, async () => {
-          await registerOrLoginUser(
-            registrationPageSelectors.usernameInput,
-            registrationPageSelectors.passwordInput,
-            registrationPageSelectors.registerButton,
-            cred.username,
-            cred.password
-          );
+    for (const  { username, password } of credentials.validCredentials) {
+      it(`Should register with valid credentials: ${username}, password: ${password}`, async function ()  {
+        await registerOrLoginUser(
+          registrationPageSelectors.usernameInput,
+          registrationPageSelectors.passwordInput,
+          registrationPageSelectors.registerButton,
+          username,
+          password
+        );
 
-          await checkSelectorTextWithContain(
-            registrationPageSelectors.errorMessage,
-            loginMessages.registrationSuccess
-          );
-        });
-      }
-    });
+        await checkSelectorTextWithContain(
+          registrationPageSelectors.errorMessage,
+          loginMessages.registrationSuccess
+        );
+      });
+    }
   });
 
   // -------------- LOGIN -------------- //
   describe("Login Page", () => {
     context("Positive scenarios", () => {
-      it("Should login with valid credentials", async function () {
-        for (const cred of credentials.validCredentials) {
-          it(`${(cred.username, cred.password)}`, async () => {
-            await registerOrLoginUser(
-              loginPageSelectors.usernameInput,
-              loginPageSelectors.passwordInput,
-              loginPageSelectors.submitButton,
-              cred.username,
-              cred.password
-            );
+      for (const  { username, password } of credentials.validCredentials) {
+        it(`Should login with valid credentials: ${username}, password: ${password}`, async function () {
+          await registerOrLoginUser(
+            loginPageSelectors.usernameInput,
+            loginPageSelectors.passwordInput,
+            loginPageSelectors.submitButton,
+            username,
+            password
+          );
 
-            await checkSelectorTextWithContain(
-              loginPageSelectors.successMessage,
-              loginMessages.loginSuccess,
-              cred.username
-            );
-          });
-        }
-      });
+          await checkSelectorTextWithContain(
+            loginPageSelectors.successMessage,
+            loginMessages.loginSuccess,
+            username
+          );
+        });
+      }
     });
 
     context("Negative scenarios", () => {
-      it("Should failed login with invalid credentials", async function () {
-        for (const cred of credentials.invalidCredentials) {
-          it(`${(cred.username, cred.password, cred.message)}`, async () => {
-            await registerOrLoginUser(
-              loginPageSelectors.usernameInput,
-              loginPageSelectors.passwordInput,
-              loginPageSelectors.submitButton,
-              cred.username,
-              cred.password
-            );
+      for (const  { username, password, message } of credentials.invalidCredentials) {
+        it(`Should failed login with invalid credentials : ${username}, password: ${password}`, async function () {
+          await registerOrLoginUser(
+            loginPageSelectors.usernameInput,
+            loginPageSelectors.passwordInput,
+            loginPageSelectors.submitButton,
+            username,
+            password
+          );
 
-            await checkSelectorTextWithContain(
-              loginPageSelectors.successMessage,
-              cred.message,
-              cred.username
-            );
-          });
-        }
-      });
+          await checkSelectorTextWithContain(
+            loginPageSelectors.successMessage,
+            message,
+            username
+          );
+        });
+      }
     });
   });
 });
