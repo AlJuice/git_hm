@@ -104,9 +104,9 @@ async function checkSelectorTextWithContain(
   data?: string
 ) {
   if (data) {
-    expect(await $(selector).getText()).toContain(message + data);
+    expect((await $(selector).getText()).trim()).toContain(message + data);
   }
-  expect(await $(selector).getText()).toContain(message);
+  expect(((await $(selector).getText())).trim()).toContain(message);
 }
 
 // Разработайте смоук тест-сьют с тестами на LOGIN на странице https://anatoly-karpovich.github.io/demo-login-form/
