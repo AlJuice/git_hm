@@ -1,9 +1,9 @@
 export interface IProduct {
-    Name: string,
-    Manufacturer: MANUFACTURERS,
-    Price: number,
-    Amount: number,
-    Notes?: string
+    name: string,
+    manufacturer: MANUFACTURERS,
+    price: number,
+    amount: number,
+    notes?: string
 }
 
 export enum MANUFACTURERS {

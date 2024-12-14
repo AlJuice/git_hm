@@ -37,7 +37,11 @@ export abstract class BasePage {
         return await element.getText()
     }
 
-    async getTextFromArrayOfElements(array: WebdriverIO.ElementArray){
-        return array.map(async (element: WebdriverIO.Element) => await element.getText())
+    async openPage(url: string){
+        await browser.url(url)
+    }
+
+    async deleteCookies(cookieNames: string[]) {
+        await browser.deleteCookies(cookieNames);
     }
 }

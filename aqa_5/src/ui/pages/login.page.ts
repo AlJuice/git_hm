@@ -1,17 +1,26 @@
-import { BasePage } from "./base.page";
+import { ICredentials } from "../../data/types/login.types";
+import { SalesPortalPage } from "./salesPortal.page";
 
-class LoginPage extends BasePage {
-    readonly ['Email Selector'] = '#emailinput'
-    readonly ['Password Selector'] = '#passwordinput'
-    readonly ['Login Button Selector'] = 'button[type="submit"]'
+class LoginPage extends SalesPortalPage {
+    readonly ['Email input'] = '#emailinput'
+    readonly ['Password input'] = '#passwordinput'
+    readonly ['Login Button'] = 'button[type="submit"]'
 
-    async fillCredentials(username?: string, password?: string){
-        username && (await this.setValue(this['Email Selector'], username))
-        password && (await this.setValue(this['Password Selector'], password))
+    async waitForPageOpened(){
+        await this.waitForDisplayed(this['Login Button'])
+    }
+
+    async fillCredentials(credentials: ICredentials){
+        credentials.email && (await this.setValue(this['Email input'], credentials.email))
+        credentials.password && (await this.setValue(this['Password input'], credentials.password))
     }
 
     async clickOnLoginButton(){
-        await this.click(this['Login Button Selector'])
+        await this.click(this['Login Button'])
+    }
+
+    async open(){
+        await this.openPage('/aqa-course-project/')
     }
 } 
 

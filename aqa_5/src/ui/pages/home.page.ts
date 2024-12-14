@@ -4,6 +4,7 @@ import { SalesPortalPage } from "./salesPortal.page";
 class HomePage extends SalesPortalPage {
     readonly ['Menu Button'] = (menuItemName: MenuItemNames) => `[name="${menuItemName}"]`;
     readonly ['Welcome Label'] = '.welcome-text'
+    readonly ['User Icon'] = '#dropdownUser1'
 
     async waitForPageOpened(){
         await this.waitForDisplayed(this["Welcome Label"])
@@ -12,6 +13,10 @@ class HomePage extends SalesPortalPage {
 
     async clickOnMenuButton(menuItemName: MenuItemNames){
         await this.click(this['Menu Button'](menuItemName))
+    }
+
+    async getUserName(){
+        return await this.getText(this['User Icon'])
     }
 }
 

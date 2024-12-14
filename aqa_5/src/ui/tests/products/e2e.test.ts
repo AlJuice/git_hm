@@ -9,49 +9,42 @@
 
 import { NOTIFICATIONS } from "../../../data/notification"
 import { generateProductData } from "../../../data/products/generateProduct"
-import { VALID_CREDENTIALS } from "../../../data/credentials";
-import { IProduct } from "../../../data/types/products.types";
-import homePage from "../../pages/home.page"
-import LoginPage from "../../pages/login.page"
-import addNewProductPage from "../../pages/products/addNewProduct.page"
-import productPage from "../../pages/products/products.page"
-import ProductTablePage from "../../pages/products/productTable.page"
-import DeleteProductPage from "../../pages/products/deleteProduct.page"
+import homePageService from "../../services/homePage.service";
+import loginPageService from "../../services/loginPage.service";
+import productsPageService from "../../services/Products/productsPage.service";
+import addNewProductPageService from "../../services/Products/addNewProductPage.service";
+
+//npm run test -- --spec="./src/ui/tests/products/e2e.test.ts"
+// setTimeout(function() {debugger;}, 0) 
 
 describe('[UI] [AQA course] e2e test', async function () {
     beforeEach(async function (){
-        await browser.url('https://anatoly-karpovich.github.io/aqa-course-project/#')
-        await LoginPage.fillCredentials(VALID_CREDENTIALS.EMAIL, VALID_CREDENTIALS.PASSWORD)
-        await LoginPage.clickOnLoginButton()
-        await homePage.waitForPageOpened()
+        await loginPageService.openSalesPortal();
+        await loginPageService.loginAsAdmin();
+        await homePageService.openProductsPage();
+        await productsPageService.openAddNewProductPage();
     })
 
     it(`Should create product with smoke data`, async function () {
-        await homePage.clickOnMenuButton('Products')
-        await productPage.waitForPageOpened()
-        await productPage.clickOnAddNewProducts()
-        await addNewProductPage.waitForPageOpened()
+        const newProductData = generateProductData();
 
-        const newProductData = generateProductData()
-        await addNewProductPage.fillInputs(newProductData)
-        await addNewProductPage.clickOnSaveButton()
-        
-        const notificationText = await productPage.getNotificationText()
-        expect(notificationText).toBe(NOTIFICATIONS.PRODUCT_CREATED)
-
-        await productPage.closeNotificationAfterAddedProducts()
-        await productPage.waitForPageOpened()
-
-        const tableData = await ProductTablePage.parsingTableData()
-        tableData.forEach((expectedEl: Partial<IProduct>) => {
-            expect(expectedEl.Name).toEqual(newProductData.Name)
-            expect(expectedEl.Manufacturer).toEqual(newProductData.Manufacturer)
-            expect(expectedEl.Price).toEqual(`$${newProductData.Price}`)
-        })
-        
-        await DeleteProductPage.clickOnDeleteIcon()
-        await DeleteProductPage.waitForPageOpened()
-        await DeleteProductPage.clickOnDeleteButton()
-        await ProductTablePage.waitForPageOpened()
+        await addNewProductPageService.populate(newProductData);
+        await productsPageService.validateNotification(NOTIFICATIONS.PRODUCT_CREATED);
+        await productsPageService.checkProductInTable(newProductData);
     }) 
+
+    it.only("Should delete created product", async function () {
+        const newProductData = generateProductData();
+
+        await addNewProductPageService.populate(newProductData);
+        await productsPageService.validateNotification(NOTIFICATIONS.PRODUCT_CREATED);
+        await productsPageService.deleteProduct(newProductData.name);
+        await productsPageService.validateNotification(NOTIFICATIONS.PRODUCT_DELETED);
+        // await browser.pause(5000)
+    })
+
+    afterEach(async () => {
+        await homePageService.validateUserName()
+        await loginPageService.signOut();
+    });
 })
