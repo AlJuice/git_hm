@@ -12,12 +12,16 @@ export const credentials_Herokuapp = {
 
 export const credentials_karpovich = {
     validCredentials: [{
-        username: "Alina",
+        username: "Alina",         
         password: "Qwerty12345"
     },
     {
+        username: "Alin",         
+        password: "Qwerty123"
+    },
+    {
         username: "ali",
-        password: "Qwerty12"
+        password: "Qwerty 1"
     },
     {
         username: "alina12345678910111213141516171819202122",
