@@ -3,6 +3,7 @@
         "moduleResolution": "node",
         "module": "ESNext",
         "target": "es2022",
+        "esModuleInterop": true,
         "lib": [
             "es2022",
             "dom"
@@ -26,5 +27,10 @@
     "include": [
         "src",
         "wdio.conf.ts"
-    ]
+    ],
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true,
+        "allowSyntheticDefaultImports": true
+    }
 }
