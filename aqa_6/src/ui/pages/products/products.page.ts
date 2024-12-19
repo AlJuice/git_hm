@@ -17,7 +17,7 @@ class ProductsPage extends SalesPortalPage {
     readonly ['Product Creation Date in table'] = (productName: string) => `${this['Table Product Row'](productName)}/td[4]`;
     readonly ['Product Delete Button in table'] = (productName: string) => `${this['Table Product Row'](productName)}//button[@title="Delete"]`;
     readonly ['Product Details Button in table'] = (productName: string) => `${this['Table Product Row'](productName)}//button[@title="Details"]`;
-
+    readonly ['Product Edit Button in table'] = (productName: string) => `${this['Table Product Row'](productName)}//button[@title="Edit"]`;
 
     async waitForPageOpened(){
         await this.waitForDisplayed(this.Title)
@@ -57,6 +57,10 @@ class ProductsPage extends SalesPortalPage {
 
     async clickOnSearchButton(){
         await this.click(this['Search Button'])
+    }
+
+    async clickOnEditProductButton(productName: string){
+        await this.click(this['Product Edit Button in table'](productName))
     }
 
 }

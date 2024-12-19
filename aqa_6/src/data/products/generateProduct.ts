@@ -1,11 +1,14 @@
 import {IProduct, MANUFACTURERS} from '../types/products.types'
+import {faker} from '@faker-js/faker'
+import {getRandomEnumValue} from '../../utils/enum/random'
+
 export function generateProductData(customData?: Partial<IProduct>): IProduct {
     return {
-        name: 'Test Product' + Date.now(),
-        manufacturer: MANUFACTURERS.APPLE,
-        amount: 10,
-        price: 1000,
-        notes: 'Test Product Notes',
+        name: faker.commerce.product() + faker.number.int({min: 1, max: 100000}),
+        manufacturer: getRandomEnumValue(MANUFACTURERS),
+        amount: faker.number.int({min: 0, max: 999}),
+        price: faker.number.int({min: 1000, max: 99999}),
+        notes: faker.string.alphanumeric({ length: 250} ),
         ...customData
     } 
 }

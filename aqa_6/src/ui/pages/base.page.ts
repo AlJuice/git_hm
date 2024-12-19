@@ -1,3 +1,9 @@
+import { logAction, logStep } from "../../utils/reporter/decorator";
+
+export type ActionContext = {
+    isSecretValue?: boolean;
+};
+
 export abstract class BasePage {
     async findElement(selector: string) {
         return $(selector)
@@ -16,27 +22,32 @@ export abstract class BasePage {
         return element
     }
 
+    @logAction("Click on element with selector {selector}")
     async click(selector: string) {
         const element = await this.waitForDisplayed(selector)
         await element.waitForEnabled()
         await element.click()
     }
 
+    @logAction("Set {text} into element with selector {selector}")
     async setValue(selector: string, value: string | number){
         const input = await this.waitForDisplayed(selector)
         await input.setValue(value)
     }
 
+    @logAction("Select dropdown value from {selector}")
     async selectDropdownValue(selector: string, value: string | number) {
         const select = await this.waitForDisplayed(selector)
         await select.selectByVisibleText(value)
     }
 
+    @logStep("Get text from ${selector}")
     async getText(selector: string){
         const element = await this.waitForDisplayed(selector)
         return await element.getText()
     }
 
+    @logStep("Open page")
     async openPage(url: string){
         await browser.url(url)
     }
