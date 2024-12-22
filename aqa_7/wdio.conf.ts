@@ -38,8 +38,8 @@ export const config: WebdriverIO.Config = {
   ],
 
   suites: {
-    ui_products: ["./src/ui/tests/products/**/*.test.ts"],
-    ui_smoke: ["./src/ui/tests/products/smoke/*.test.ts"],
+    ui_products: ["./src/api/tests/products/**/*.test.ts"],
+    ui_smoke: ["./src/api/tests/products/smoke/*.test.ts"],
   },
   //
   // ============

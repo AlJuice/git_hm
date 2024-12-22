@@ -33,7 +33,7 @@ describe('[UI] [AQA course] e2e test', async function () {
         await productsPageService.checkProductInTable(newProductData);
     }) 
 
-    it.only("Should delete created product", async function () {
+    it("Should delete created product", async function () {
         const newProductData = generateProductData();
 
         await addNewProductPageService.populate(newProductData);
