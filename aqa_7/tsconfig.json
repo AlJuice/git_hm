@@ -2,10 +2,9 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "module": "ESNext",
-        "target": "ES2024",
-        "esModuleInterop": true,
+        "target": "es2022",
         "lib": [
-            "es2023",
+            "es2022",
             "dom"
         ],
         "types": [
@@ -24,14 +23,11 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "allowSyntheticDefaultImports": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
     },
-    "ts-node": {
-        "esm": true,
-        "experimentalSpecifierResolution": "node"
-      },
     "include": [
         "src",
-        "wdio.conf.ts"
+        "wdio.conf.ts"  
     ]
 }

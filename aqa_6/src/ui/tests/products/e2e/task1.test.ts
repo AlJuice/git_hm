@@ -8,12 +8,12 @@
 //  - Закрыть модалку деталей
 //  - Удалить продукт в afterHook
 
-import { NOTIFICATIONS } from "../../../data/notification"
-import { generateProductData } from "../../../data/products/generateProduct"
-import homePageService from "../../services/homePage.service";
-import loginPageService from "../../services/loginPage.service";
-import productsPageService from "../../services/Products/productsPage.service";
-import addNewProductPageService from "../../services/Products/addNewProductPage.service";
+import { NOTIFICATIONS } from "../../../../data/notification"
+import { generateProductData } from "../../../../data/products/generateProduct"
+import homePageService from "../../../services/homePage.service";
+import loginPageService from "../../../services/loginPage.service";
+import productsPageService from "../../../services/Products/productsPage.service";
+import addNewProductPageService from "../../../services/Products/addNewProductPage.service";
 
 //npm run test -- --spec="./src/ui/tests/products/task1.test.ts"
 // setTimeout(function() {debugger;}, 0) 

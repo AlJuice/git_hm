@@ -6,14 +6,6 @@ export interface IProduct {
     notes?: string
 }
 
-export interface IProductTable {
-    name: string,
-    price: string,
-    manufacturer: MANUFACTURERS,
-    createdOn: string,
-    actions?: string
-}
-
 export enum MANUFACTURERS {
     APPLE = "Apple",
     SAMSUNG = "Samsung",

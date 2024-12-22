@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "AQA",
+        "name": "UI",
         "type": "node",
         "request": "launch",
         "args": ["wdio.conf.js", "--spec", "${file}"],
