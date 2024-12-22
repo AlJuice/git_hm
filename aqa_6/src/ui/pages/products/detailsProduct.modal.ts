@@ -20,6 +20,7 @@ class DetailsProductModal extends SalesPortalPage {
 
     async waitForPageOpened() {
         await this.waitForDisplayed(this['Modal container'])
+        await this.waitForSpinnersToBeHidden('Product details modal')
     }
 
     async waitForDisappeared(){
@@ -41,7 +42,6 @@ class DetailsProductModal extends SalesPortalPage {
             this.getText(this['Product Price in module']),
             this.getText(this['Product Manufacturer in module']),
             this.getText(this['Product Notes in module']),
-
         ])
         return {
             name, 

@@ -1,10 +1,11 @@
 import _ from "lodash";
-import { IProduct } from "../../../data/types/products.types"
+import { Direction, SortHeaders} from "../../../data/types/sorting.types";
 import addNewProductPage from "../../pages/products/addNewProduct.page"
 import productsPage from "../../pages/products/products.page"
 import EditProductPage from "../../pages/products/editProduct.page"
 import { SalesPortalPageService } from "../salesPortalPage.service";
 import { logStep } from "../../../utils/reporter/decorator";
+import { IProduct } from "../../../data/types/products.types";
 
 class productPageService extends SalesPortalPageService {
     private productsPage = productsPage
@@ -34,7 +35,7 @@ class productPageService extends SalesPortalPageService {
     async checkDetailsProductInModule(product: IProduct){
         await this.openDetailsProduct(product.name)
         const actualProductData = await this.productsPage['Details Modal'].getDetailsData()
-        const expectedProductData = _.pick(product, ["name", "amount", "price", "manufacturer", "notes"])
+        const expectedProductData = _.pick(product, ["name", "amount", "price", "manufacturer", "notes"]) // _.omit(product, ['createdOn']);
         expect(actualProductData).toEqual(expectedProductData)
         await this.closeDetailsProduct()
     }
@@ -73,6 +74,61 @@ class productPageService extends SalesPortalPageService {
         await this.productsPage.fillSearchWitData(productName)
         await this.productsPage.clickOnSearchButton()
         await this.productsPage.waitForPageOpened()
+    }
+
+    @logStep("Sort Table By Header")
+    async sortTable(headerName: SortHeaders, direction: Direction){
+        return await browser.waitUntil( 
+            async () => {
+                if (headerName == "CreatedOn") headerName = "Created On" as SortHeaders
+                const currentDirection = await this.productsPage.getSortDirection(headerName)
+                if (currentDirection === direction) { 
+                    return true; 
+                } 
+                await this.productsPage.clickOnSortingHeader(headerName)
+                return false
+            }, 
+            { 
+                timeout: 30000, 
+                interval: 500,
+                timeoutMsg: `Could not set header ${headerName} to direction ${direction} within the timeout.` 
+            } 
+        );
+    }
+
+    @logStep("Sort Products")
+    async sortProducts(direction: Direction, initialColumn: string[], sortedColumn: string[]){
+        if (direction === "asc"){
+            initialColumn.sort((a, b) => a.localeCompare(b) );
+            expect(initialColumn).toEqual(sortedColumn)
+
+        } else {
+            initialColumn.sort((a, b) => b.localeCompare(a) );
+            expect(initialColumn).toEqual(sortedColumn)
+        }
+    }
+
+    @logStep("Filter Table Columns to one needed")
+    async filterTableColumns(headerName: SortHeaders, table: { Name: string;
+                                                              Price: number;
+                                                              Manufacturer: string;
+                                                              CreatedOn: string;
+                                                            }[]){
+        return table.map(row => row[headerName].toString())
+    }
+    
+
+    @logStep("Check Sorted Table")
+    async checkSortingTable(headerName: SortHeaders, direction: Direction){
+        const initialTable =  await this.productsPage.getAllProductsFromTable()
+        const initialColumn = await this.filterTableColumns(headerName, initialTable)
+        const isSorted = await this.sortTable(headerName, direction)
+
+        if (isSorted){
+            const sortedTable  = await this.productsPage.getAllProductsFromTable() 
+            const sortedColumn = await this.filterTableColumns(headerName, sortedTable)
+            this.sortProducts(direction, initialColumn, sortedColumn)
+        }
     }
 }
 

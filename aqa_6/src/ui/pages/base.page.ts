@@ -55,4 +55,11 @@ export abstract class BasePage {
     async deleteCookies(cookieNames: string[]) {
         await browser.deleteCookies(cookieNames);
     }
+
+    @logAction("get attribute from ${selector}")
+    async getAttribute(selector: string, name: string) {
+        const element = await this.waitForDisplayed(selector);
+        const atribute = await element.getAttribute(name);
+        return atribute;
+      }
 }

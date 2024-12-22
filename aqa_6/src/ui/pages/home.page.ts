@@ -7,8 +7,8 @@ class HomePage extends SalesPortalPage {
     readonly ['User Icon'] = '#dropdownUser1'
 
     async waitForPageOpened(){
-        await this.waitForDisplayed(this["Welcome Label"])
         await this.waitForSpinnersToBeHidden('Home')
+        await this.waitForDisplayed(this["Welcome Label"])
     }
 
     async clickOnMenuButton(menuItemName: MenuItemNames){
