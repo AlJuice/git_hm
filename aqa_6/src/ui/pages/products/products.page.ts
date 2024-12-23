@@ -71,6 +71,7 @@ class ProductsPage extends SalesPortalPage {
 
     async clickOnSortingHeader(headerName: SortHeaders){
         await this.click(this['Table Sorting header'](headerName))
+        await this.waitForSpinnersToBeHidden('Products')
     }
 
     async clickOnDeleteProductButton(productName: string){
