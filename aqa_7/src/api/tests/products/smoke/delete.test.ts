@@ -1,40 +1,31 @@
-
 //npm run test -- --spec="./src/api/tests/products/smoke/delete.test.ts"
 
-import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../../config/environment";
-import { generateProductData } from "../../../data/products/generateProduct";
-import { IProduct } from "../../../data/types/products.types";
-import { STATUS_CODES } from "../../../data/api/statusCodes";
-import ProductsController from "../../../controllers/products.controller";
-import LoginController from "../../../controllers/login.controller";
-
+import { STATUS_CODES } from "../../../../data/api/statusCodes";
+import ProductsController from "../../../api/controllers/products.controller";
+import { SignInApiService } from '../../../api/service/signInApiService.service';
+import ProductApiService from "../../../api/service/productApiService.service";
+import productsController from "../../../api/controllers/products.controller";
+import { validateResponse } from "../../../../utils/validation/apiValidation";
+import { ERROR_MESSAGES } from "../../../../data/types/errorMessages";
 
 describe("[API] [Products] Delete", async function () {
-  const loginBody = {
-    username: ADMIN_USERNAME,
-    password: ADMIN_PASSWORD,
-  };
-
-  let token = "";
-  let id = "";
-  let productData: IProduct;
+  const signInApiService = new SignInApiService();
+  let token = ''
+  let id = ''
 
   beforeEach(async function () {
-    const loginResponse = await LoginController.login(loginBody);
-    expect(loginResponse.status).toBe(STATUS_CODES.OK);
-    const responseToken = loginResponse.headers.get("authorization");
-    token = responseToken!;
-    productData = generateProductData();
-    const createProductResponse = await ProductsController.create(productData, token);
-    expect(createProductResponse.status).toBe(STATUS_CODES.CREATED);
-    const body = await createProductResponse.json();
-    id = body.Product._id;
+    await signInApiService.signInAsAdmin();
+    token = signInApiService.getToken()
+    await ProductApiService.createProduct(token);
+    id = ProductApiService.getCreatedProduct()._id;
   });
 
   it("Should delete created product", async function () {
     const deleteProductResponse = await ProductsController.delete(id, token);
     expect(deleteProductResponse.status).toBe(STATUS_CODES.DELETED);
-    const body = deleteProductResponse.body
-    expect(body).toBe(null)
+    expect(deleteProductResponse.body).toBe(null)
+
+    const getReponse = await productsController.get(id, token)
+    validateResponse(getReponse, STATUS_CODES.NOT_FOUND, false, ERROR_MESSAGES.PRODUCT_NOT_FOUND(id))
   });
 });

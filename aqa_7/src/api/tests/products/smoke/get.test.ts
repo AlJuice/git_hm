@@ -1,52 +1,32 @@
 
 //npm run test -- --spec="./src/api/tests/products/smoke/get.test.ts"
 
-import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../../config/environment";
-import { generateProductData } from "../../../data/products/generateProduct";
-import { IProduct } from "../../../data/types/products.types";
-import { STATUS_CODES } from "../../../data/api/statusCodes";
-import { validateResponse } from "../../../utils/validation/apiValidation";
-import ProductsController from "../../../controllers/products.controller";
-import LoginController from "../../../controllers/login.controller";
-
+import { STATUS_CODES } from "../../../../data/api/statusCodes";
+import { validateResponse } from "../../../../utils/validation/apiValidation";
+import ProductsController from "../../../api/controllers/products.controller";
+import ProductApiService from "../../../api/service/productApiService.service";
+import { SignInApiService } from '../../../api/service/signInApiService.service';
 
 describe("[API] [Products] Get", async function () {
-  const loginBody = {
-    username: ADMIN_USERNAME,
-    password: ADMIN_PASSWORD,
-  };
-
-  let token = "";
-  let id = "";
-  let productData: IProduct;
+  const signInApiService = new SignInApiService();
+  let token = ''
+  let id = ''
 
   beforeEach(async function () {
-    const loginResponse = await LoginController.login(loginBody);
-
-    expect(loginResponse.status).toBe(STATUS_CODES.OK);
-    const responseToken = loginResponse.headers.get("authorization");
-    token = responseToken!;
-
-    productData = generateProductData();
-    const createProductResponse = await ProductsController.create(productData, token);
-    expect(createProductResponse.status).toBe(STATUS_CODES.CREATED);
-
-    const body = await createProductResponse.json();
-    validateResponse(body, true, null);
-    id = body.Product._id;
+    token = await signInApiService.signInAsAdmin();
+    await ProductApiService.createProduct(token);
+    id = ProductApiService.getCreatedProduct()._id;
   });
 
   it("Should get created product", async function () {
     const getProductResponse = await ProductsController.get(id, token);
-    expect(getProductResponse.status).toBe(STATUS_CODES.OK);
-    const body = await getProductResponse.json();
-    validateResponse(body, true, null);
-    const createdProduct = body.Product;
-    expect(createdProduct).toMatchObject({ ...productData });
+    const createdProduct = getProductResponse.body.Product;
+
+    validateResponse(getProductResponse, STATUS_CODES.OK, true, null);
+    expect(createdProduct).toMatchObject({ ...ProductApiService.getCreatedProduct() });
   });
 
   afterEach(async function () {
-    const response = await ProductsController.delete(id, token);
-    expect(response.status).toBe(STATUS_CODES.DELETED);
+    await ProductApiService.deleteProduct(token);
   });
 });
