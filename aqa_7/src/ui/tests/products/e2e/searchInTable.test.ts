@@ -1,14 +1,3 @@
-// - Открыть url https://anatoly-karpovich.github.io/aqa-course-project/#
-// - Войти в приложения используя учетные данные aqacourse@gmail.com / password 
-// - Создать продукт (модуль Products)
-// - Верифицировать текст нотификации и закрыть кликнув на крестик
-// - Ввести название созданного продукта в поле search
-// - Кликнуть по кнопке Search
-// - Дождаться загрузки данных
-// - Верифицировать, что:
-//    1. Только 1 продукт в таблице
-//    2. Продукт соответствует созданному вами
-// - Удалить продукт в afterHook
 
 import { NOTIFICATIONS } from "../../../../data/notifications";
 import { generateProductData } from "../../../../data/products/generateProduct"

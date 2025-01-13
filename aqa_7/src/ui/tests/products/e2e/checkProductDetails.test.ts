@@ -1,12 +1,3 @@
-// Используя сервисную архитектуру создать е2е тест со следующими шагами:
-//  - Открыть url https://anatoly-karpovich.github.io/aqa-course-project/#
-//  - Войти в приложения используя учетные данные aqacourse@gmail.com / password 
-//  - Создать продукт (модуль Products)
-//  - Верифицировать текст нотификации и закрыть кликнув на крестик
-//  - Открыть модалку Details для созданного продукта
-//  - Верифицировать что все данные соответствуют продукту что вы создавали
-//  - Закрыть модалку деталей
-//  - Удалить продукт в afterHook
 
 import { NOTIFICATIONS } from "../../../../data/notifications"
 import { generateProductData } from "../../../../data/products/generateProduct"
