@@ -1,4 +1,4 @@
-import { PIZZA_SIZE, toppingsType } from '../data/types';
+import { PIZZA_SIZE, toppingsType } from './types';
 
 //Енам с названиями ваших пицц
 export enum PIZZA_NAMES {
