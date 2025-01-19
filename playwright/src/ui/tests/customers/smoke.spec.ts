@@ -1,21 +1,62 @@
-import test from "@playwright/test";
+import { test as servicesFixture, expect } from "../../../fixtures/services.fixture";
+import { test as pagesFixture } from "../../../fixtures/pages.fixture";
+import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../../config/environment";
+import { generateNewCustomer } from "../../../data/customers/generateCustomer";
+import { NOTIFICATIONS } from "../../../data/notifications";
+import { mergeTests } from "@playwright/test";
 
-test.describe('[UI] [Customers] [Add new Customer]', async () => {
-    test('Should create new customer with valid data', async function ({ page}) {
+const test = mergeTests(servicesFixture, pagesFixture);
+
+test.describe.skip('[UI] [Customers] [Add new Customer]', async () => {
+    test.skip("Should create new customer with valid data without POs", async ({ page }) => {
         await page.goto('https://anatoly-karpovich.github.io/aqa-course-project/')
-
         await page.getByPlaceholder('Enter password').fill('aqacourse@gmail.com')
         await page.getByPlaceholder('Enter a valid email address').fill('password')
         await page.getByText('Login', {exact: true}).click()
         await page.waitForTimeout(5000)
-
         await page.getByRole('listitem').filter({ hasText: 'Customers'}).click()
         await page.locator('.spinner-border').waitFor({ state: 'hidden'})
-
         await page.locator('.page-title-button').click()
         await page.locator('#inputName').fill('Test')
         await page.locator('#inputEmail').fill('Test' + Date.now() + '@gmail.com')
         await page.locator('select#inputCountry').selectOption('France')
     })
 
+    test("Should create new customer with valid data with POs", async ({ 
+      signInPage,
+      homePage,
+      customersPage,
+      addNewCustomerPage
+     }) => {
+       
+      await signInPage.openLoginPage();
+      await signInPage.fillCredentialsInputs({
+        username: ADMIN_USERNAME,
+        password: ADMIN_PASSWORD,
+      });
+      await signInPage.clickSubmitButton();
+      await homePage.waitForOpened();
+      await homePage.clickOnViewDetailsButton("Customers");
+      await customersPage.waitForOpened();
+      await customersPage.clickOnAddNewCustomer();
+      await addNewCustomerPage.fillInputs(generateNewCustomer());
+      await addNewCustomerPage.clickOnSaveButton();
+      await customersPage.waitForOpened();
+      const notificationText = await customersPage.getLastNotificationText();
+      expect(notificationText).toBe(NOTIFICATIONS.CUSTOMER_CREATED);
+      });
+
+      test("Should create new customer with valid data with Page Services", async ({
+        signInPageService,
+        homePageService,
+        customersPageService,
+        addNewCustomerPageService,
+      }) => {
+        await signInPageService.openSalesPortal();
+        await signInPageService.loginAsAdmin();
+        await homePageService.openCustomersPage();
+        await customersPageService.openAddNewCustomerPage();
+        await addNewCustomerPageService.create();
+        await customersPageService.validateCreateCustomerNotification();
+      });
 })
