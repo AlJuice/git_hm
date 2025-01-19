@@ -1,4 +1,4 @@
-import { TOPPINGS } from '../data/prices';
+import { TOPPINGS } from './prices';
 
 export interface IMeal {
   readonly name: string; // абстрактный класс должен принимать тоже абстрактные типы данных
